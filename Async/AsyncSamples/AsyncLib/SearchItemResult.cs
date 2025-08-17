@@ -1,35 +1,32 @@
-﻿namespace Wrox.ProCSharp.Async
-{
-  public class SearchItemResult : BindableBase
-  {
-    private string _title;
+namespace Wrox.ProCSharp.Async;
 
+public class SearchItemResult : BindableBase
+{
+    private string _title = string.Empty;
     public string Title
     {
-      get { return _title; }
-      set { SetProperty(ref _title, value); }
+        get => _title;
+        set => SetProperty(ref _title, value);
     }
 
-    private string _url;
+    private string _url = string.Empty;
     public string Url
     {
-      get { return _url; }
-      set { SetProperty(ref _url, value); }
+        get => _url;
+        set => SetProperty(ref _url, value);
     }
 
-    private string _thumbnailUrl;
+    private string _thumbnailUrl = string.Empty;
     public string ThumbnailUrl
     {
-      get { return _thumbnailUrl; }
-      set { SetProperty(ref _thumbnailUrl, value); }
+        get => _thumbnailUrl;
+        set => SetProperty(ref _thumbnailUrl, value);
     }
 
-    private string _source;
+    private string _source = string.Empty;
     public string Source
     {
-      get { return _source; }
-      set { SetProperty(ref _source, value); }
+        get => _source;
+        set => SetProperty(ref _source, value);
     }
-
-  }
 }

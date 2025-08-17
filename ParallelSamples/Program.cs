@@ -1,33 +1,33 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace ParallelSamples
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            if (args.Length != 1)
-            {
-                ShowUsage();
-                return;
-            }
+namespace ParallelSamples;
 
-            switch (args[0])
-            {
-                case "pf":
-                    ParallelFor();
-                    break;
-                case "pfa":
-                    ParallelForWithAsync();
-                    break;
-                case "spfe":
-                    StopParallelForEarly();
-                    break;
-                case "pfi":
-                    ParallelForWithInit();
-                    break;
+class Program
+{
+    static void Main(string[] args)
+    {
+        if (args.Length != 1)
+        {
+            ShowUsage();
+            return;
+        }
+
+        switch (args[0])
+        {
+            case "pf":
+                ParallelFor();
+                break;
+            case "pfa":
+                ParallelForWithAsync();
+                break;
+            case "spfe":
+                StopParallelForEarly();
+                break;
+            case "pfi":
+                ParallelForWithInit();
+                break;
                 case "pfe":
                     ParallelForEach();
                     break;
@@ -149,9 +149,8 @@ namespace ParallelSamples
         }
 
 
-        public static void Log(string prefix)
-        {
-            WriteLine($"{prefix} task: {Task.CurrentId}, thread: {Thread.CurrentThread.ManagedThreadId}");
-        }
+    public static void Log(string prefix)
+    {
+        WriteLine($"{prefix} task: {Task.CurrentId}, thread: {Thread.CurrentThread.ManagedThreadId}");
     }
 }

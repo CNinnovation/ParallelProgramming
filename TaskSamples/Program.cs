@@ -1,12 +1,11 @@
-﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace TaskSamples
+namespace TaskSamples;
+
+class Program
 {
-    class Program
-    {
         static void Main(string[] args)
         {
             if (args.Length != 1)
@@ -107,22 +106,22 @@ namespace TaskSamples
 
         public static void TaskWithResultDemo()
         {
-            var t1 = new Task<Tuple<int, int>>(TaskWithResult, Tuple.Create(8, 3));
+            var t1 = new Task<(int result, int remainder)>(TaskWithResult, (8, 3));
             t1.Start();
             WriteLine(t1.Result);
             t1.Wait();
-            WriteLine($"result from task: {t1.Result.Item1} {t1.Result.Item2}");
+            WriteLine($"result from task: {t1.Result.result} {t1.Result.remainder}");
         }
 
 
-        private static Tuple<int, int> TaskWithResult(object division)
+        private static (int result, int remainder) TaskWithResult(object? division)
         {
-            Tuple<int, int> div = (Tuple<int, int>)division;
+            var div = ((int, int))division!;
             int result = div.Item1 / div.Item2;
-            int reminder = div.Item1 % div.Item2;
+            int remainder = div.Item1 % div.Item2;
             WriteLine("task creates a result...");
 
-            return Tuple.Create(result, reminder);
+            return (result, remainder);
         }
 
 
@@ -153,27 +152,22 @@ namespace TaskSamples
 
 
 
-        public static void TaskMethod(object o)
+        public static void TaskMethod(object? o)
         {
             Log(o?.ToString());
         }
 
         private static object s_logLock = new object();
 
-        public static void Log(string title)
+        public static void Log(string? title)
         {
             lock (s_logLock)
             {
                 WriteLine(title);
                 WriteLine($"Task id: {Task.CurrentId?.ToString() ?? "no task"}, thread: {Thread.CurrentThread.ManagedThreadId}");
-
-#if (NET46)
                 WriteLine($"is pooled thread: {Thread.CurrentThread.IsThreadPoolThread}");
-#endif
                 WriteLine($"is background thread: {Thread.CurrentThread.IsBackground}");
                 WriteLine();
             }
         }
-
-    }
 }
