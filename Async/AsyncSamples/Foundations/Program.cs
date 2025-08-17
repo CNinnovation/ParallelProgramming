@@ -1,27 +1,18 @@
-﻿using System;
-#if NET46
 using System.Threading;
-using System.Windows.Threading;
-#endif
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace Foundations
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-#if NET46
-            var ctx = new DispatcherSynchronizationContext();
+namespace Foundations;
 
-            SynchronizationContext.SetSynchronizationContext(ctx);
-#endif
-            if (args.Length != 1)
-            {
-                Usage();
-                return;
-            }
+class Program
+{
+    static void Main(string[] args)
+    {
+        if (args.Length != 1)
+        {
+            Usage();
+            return;
+        }
 
             switch (args[0].ToLower())
             {
@@ -173,13 +164,7 @@ namespace Foundations
         public static void TraceThreadAndTask(string info)
         {
             string taskInfo = Task.CurrentId == null ? "no task" : "task " + Task.CurrentId;
-#if NET46
             WriteLine($"{info} in thread {Thread.CurrentThread.ManagedThreadId} and {taskInfo}");
-#else
-            WriteLine($"{info} in {taskInfo}");
-#endif
         }
-
-    }
 }
 
